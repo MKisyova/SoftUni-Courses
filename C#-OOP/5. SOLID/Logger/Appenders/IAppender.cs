@@ -1,5 +1,4 @@
-﻿
-using Loggers.EnumLogLevel;
+﻿using Loggers.EnumLogLevel;
 using Loggers.Layouts;
 
 namespace Loggers.Appenders

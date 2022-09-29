@@ -1,5 +1,4 @@
-﻿
-namespace Loggers.LogFiles
+﻿namespace Loggers.LogFiles
 {
     public interface ILogFile
     {

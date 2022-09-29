@@ -31,7 +31,6 @@ namespace Loggers.Appenders
         public override string GetAppenderInfo()
         {
             return base.GetAppenderInfo() + $", File size {this.LogFile.Size}" + Environment.NewLine;
-            //=> $"{base.GetAppenderInfo()}, File size {this.LogFile.Size}";
         }
     }
 }

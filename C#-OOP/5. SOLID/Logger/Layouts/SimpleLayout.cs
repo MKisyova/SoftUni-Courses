@@ -1,5 +1,4 @@
-﻿
-namespace Loggers.Layouts
+﻿namespace Loggers.Layouts
 {
     public class SimpleLayout : ILayout
     {

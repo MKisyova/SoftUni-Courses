@@ -1,5 +1,4 @@
-﻿
-namespace Loggers.EnumLogLevel
+﻿namespace Loggers.EnumLogLevel
 {
     public enum LogLevel
     {
