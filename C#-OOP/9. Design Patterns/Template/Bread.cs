@@ -13,7 +13,6 @@ namespace Template
             Console.WriteLine($"Slicing the {GetType().Name} bread.");
         }
 
-        //template method
         public void Make()
         {
             MixIngredients();
