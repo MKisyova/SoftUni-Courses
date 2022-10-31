@@ -1,9 +1,7 @@
 ﻿using Suls.Data;
 using Suls.ViewModels.Problems;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Suls.Services
 {
@@ -32,6 +30,29 @@ namespace Suls.Services
             }).ToList();
 
             return problems;
+        }
+
+        public string GetNameById(string id)
+        {
+            var problem = this.db.Problems.FirstOrDefault(x => x.Id == id);
+            return problem?.Name;
+        }
+
+        public ProblemViewModel GetById(string id)
+        {
+            return this.db.Problems.Where(x => x.Id == id)
+                .Select(x => new ProblemViewModel
+                {
+                    Name = x.Name,
+                    Submissions = x.Submissions.Select(s => new SubmissionViewModel
+                    {
+                        SubmissionId = s.Id,
+                        AchievedResult = s.AchievedResult,
+                        CreatedOn = s.CreatedOn,
+                        Username = s.User.Username,
+                        MaxPoints = x.Points,
+                    })
+                }).FirstOrDefault();
         }
     }
 }

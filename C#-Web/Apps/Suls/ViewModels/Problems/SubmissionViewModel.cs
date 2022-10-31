@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Suls.ViewModels.Problems
 {
@@ -15,5 +13,7 @@ namespace Suls.ViewModels.Problems
         public int AchievedResult { get; set; }
 
         public int MaxPoints { get; set; }
+
+        public int Percentage => (int)Math.Round(this.AchievedResult * 100.0M / this.MaxPoints);
     }
 }

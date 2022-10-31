@@ -2,10 +2,7 @@
 using Suls.ViewModels.Users;
 using SUS.HTTP;
 using SUS.MvcFramework;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Suls.Controllers
 {
@@ -19,6 +16,10 @@ namespace Suls.Controllers
         }
         public HttpResponse Login()
         {
+            if (this.IsUserSignedIn())
+            {
+                return this.Redirect("/");
+            }
             return this.View();
         }
 
@@ -38,6 +39,10 @@ namespace Suls.Controllers
 
         public HttpResponse Register()
         {
+            if (this.IsUserSignedIn())
+            {
+                return this.Redirect("/");
+            }
             return this.View();
         }
 
@@ -80,6 +85,10 @@ namespace Suls.Controllers
 
         public HttpResponse Logout()
         {
+            if (!this.IsUserSignedIn())
+            {
+                return this.Redirect("/");
+            }
             this.SignOut();
             return this.Redirect("/");
         }
