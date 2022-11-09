@@ -35,10 +35,14 @@ namespace Git.Services
             this.db.SaveChanges();
         }
 
-        public IEnumerable<AllViewModel> GetAll()
+        public IEnumerable<AllViewModel> GetAll(string creatorId)
         {
-            var commits = this.db.Commits.Select(x => new AllViewModel
+            var commits = this.db.Commits
+                .Where(x => x.CreatorId == creatorId)
+                .OrderByDescending(x => x.CreatedOn)
+                .Select(x => new AllViewModel
             {
+                Id = x.Id,
                 Description = x.Description,
                 Repository = x.Repository.Name,
                 CreatedOn = DateTime.UtcNow,

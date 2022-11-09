@@ -7,7 +7,7 @@ namespace Git.Services
     {
         void Create (string repositoryId, string creatorId, string description);
 
-        IEnumerable<AllViewModel> GetAll();
+        IEnumerable<AllViewModel> GetAll(string creatorId);
 
         void Delete (string id);
     }
