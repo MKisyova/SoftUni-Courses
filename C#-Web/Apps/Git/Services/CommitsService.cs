@@ -30,7 +30,9 @@ namespace Git.Services
 
         public void Delete(string id)
         {
-            var commit = this.db.Commits.Where(x => x.Id == id).FirstOrDefault();
+            var commit = this.db.Commits
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
             this.db.Commits.Remove(commit);
             this.db.SaveChanges();
         }
@@ -45,7 +47,7 @@ namespace Git.Services
                 Id = x.Id,
                 Description = x.Description,
                 Repository = x.Repository.Name,
-                CreatedOn = DateTime.UtcNow,
+                CreatedOn = x.CreatedOn,
             }).ToList();
 
             return commits;

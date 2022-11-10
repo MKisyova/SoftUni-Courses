@@ -22,6 +22,7 @@ namespace Git.Services
                 Name = name, 
                 IsPublic = repositoryType,
                 OwnerId = ownerId,
+                CreatedOn = DateTime.UtcNow,
             };
             this.db.Repositories.Add(repository);
             this.db.SaveChanges();
@@ -29,11 +30,13 @@ namespace Git.Services
 
         public IEnumerable<RepositoriesAllViewModel> GetAll()
         {
-            var repositories = this.db.Repositories.Select(x => new RepositoriesAllViewModel
+            var repositories = this.db.Repositories
+                .OrderByDescending(x => x.CreatedOn)
+                .Select(x => new RepositoriesAllViewModel
             {
                 Name = x.Name,
                 Owner = x.Owner.Username,
-                CreatedOn = DateTime.UtcNow,
+                CreatedOn = x.CreatedOn,
                 CommitsCount = x.Commits.Count(),
                 Id = x.Id
             }).ToList();
@@ -43,26 +46,20 @@ namespace Git.Services
 
         public IEnumerable<RepositoriesAllViewModel> GetAllPublic()
         {
-            var repositories = this.db.Repositories.Where(x => x.IsPublic == true)
+            var repositories = this.db.Repositories
+                .Where(x => x.IsPublic == true)
+                .OrderByDescending(x => x.CreatedOn)
                 .Select(x => new RepositoriesAllViewModel
             {
                 Name = x.Name,
                 Owner = x.Owner.Username,
-                CreatedOn = DateTime.UtcNow,
+                CreatedOn = x.CreatedOn,
                 CommitsCount = x.Commits.Count(),
                 Id = x.Id
             }).ToList();
 
             return repositories;
         }
-
-        //public string GetById(string id)
-        //{
-        //    return this.db.Repositories
-        //        .Where(x => x.Id == id)
-        //        .Select(x => x.Id)
-        //        .FirstOrDefault();
-        //}
 
         public string GetNameById(string id)
         {
